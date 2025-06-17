@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CGPA to Percentage</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <nav>
+    <ul>
+      <li><a href="index.html"><button>Home</button></a></li>
+      <li><a href="cgpa.html"><button>CGPA Calculator</button></a></li>
+      <li><a href="sgpa.html"><button>SGPA Calculator</button></a></li>
+      <li><a href="cgpa-to-percentage.html"><button>CGPA to Percentage</button></a></li>
+    </ul>
+  </nav>
+
+    <section>
+      <h1>🎯 Convert CGPA to Percentage</h1>
+      <div class="container3">
+      <p>Most universities use the formula: <strong>Percentage = CGPA × 9.5</strong></p>
+
+      <label>Enter CGPA:
+        <input type="number" id="cgpaInput" step="0.01" />
+        <button onclick="convert()">Convert</button>
+      </label>
+
+      <div id="percentResult" class="result"></div>
+    </section>
+  </div>
+
+  <script>
+    function convert() {
+      const cgpa = parseFloat(document.getElementById("cgpaInput").value);
+      const resultBox = document.getElementById("percentResult");
+
+      if (isNaN(cgpa) || cgpa < 0 || cgpa > 10) {
+        resultBox.innerText = "⚠️ Please enter a valid CGPA between 0 and 10.";
+        return;
+      }
+
+      const percentage = (cgpa * 9.5).toFixed(2);
+      resultBox.innerText = `📊 Your Percentage is: ${percentage}%`;
+    }
+  </script>
+</body>
+
+</html>

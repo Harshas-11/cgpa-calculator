@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SGPA Calculator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <nav>
+    <ul>
+      <li><a href="index.html"><button>Home</button></a></li>
+      <li><a href="cgpa.html"><button>CGPA Calculator</button></a></li>
+      <li><a href="sgpa.html"><button>SGPA Calculator</button></a></li>
+      <li><a href="cgpa-to-percentage.html"><button>CGPA to Percentage</button></a></li>
+    </ul>
+  </nav>
+
+    <section>
+      <h1>📘 SGPA Calculator</h1>
+      <div class="container2">
+      <p>Calculate your Semester Grade Point Average (SGPA) by entering your subject grades and credits below:</p>
+
+      <label for="subjectCount">Number of Subjects:
+        <input type="number" id="subjectCount" min="1" max="12" />
+        <button onclick="generateSubjects()">Generate</button>
+      </label>
+
+      <div id="subjectFields"></div>
+
+      <form id="sgpaForm">
+        <button type="submit">Calculate SGPA</button>
+      </form>
+
+      <div id="errorMessage" class="error"></div>
+      <div id="sgpaResult" class="result"></div>
+    </section>
+  </div>
+
+  <script>
+    const gradeMap = {
+      "A++": 10,
+      "A+": 9,
+      "A": 8,
+      "B+": 7,
+      "B": 6,
+      "C": 5,
+      "D": 0
+    };
+
+    function generateSubjects() {
+      const count = parseInt(document.getElementById("subjectCount").value);
+      const container = document.getElementById("subjectFields");
+      container.innerHTML = "";
+
+      for (let i = 1; i <= count; i++) {
+        const div = document.createElement("div");
+        div.classList.add("subject-box");
+        div.innerHTML = `
+          <h4>Subject #${i}</h4>
+          <label>Grade:
+            <select name="grade${i}">
+              <option value="A++">A++</option>
+              <option value="A+">A+</option>
+              <option value="A">A</option>
+              <option value="B+">B+</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+              <option value="D">D</option>
+            </select>
+          </label>
+          <label>Credit:
+            <input type="number" name="credit${i}" step="0.1" min="0" max="10" required>
+          </label>
+        `;
+        container.appendChild(div);
+      }
+    }
+
+    document.getElementById("sgpaForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const count = parseInt(document.getElementById("subjectCount").value);
+      let totalPoints = 0;
+      let totalCredits = 0;
+
+      for (let i = 1; i <= count; i++) {
+        const grade = gradeMap[document.querySelector(`[name=grade${i}]`).value];
+        const credit = parseFloat(document.querySelector(`[name=credit${i}]`).value);
+        if (isNaN(grade) || isNaN(credit)) {
+          document.getElementById("errorMessage").innerText = `⚠️ Invalid input in Subject #${i}`;
+          return;
+        }
+        totalPoints += grade * credit;
+        totalCredits += credit;
+      }
+
+      const sgpa = totalCredits === 0 ? 0 : (totalPoints / totalCredits).toFixed(2);
+      document.getElementById("errorMessage").innerText = "";
+      document.getElementById("sgpaResult").innerText = `🎓 Your SGPA is: ${sgpa}`;
+    });
+  </script>
+</body>
+
+</html>

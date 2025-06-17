@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CGPA Calculator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+   <nav>
+    <ul>
+      <li><a href="index.html"><button>Home</button></a></li>
+      <li><a href="cgpa.html"><button>CGPA Calculator</button></a></li>
+      <li><a href="sgpa.html"><button>SGPA Calculator</button></a></li>
+      <li><a href="cgpa-to-percentage.html"><button>CGPA to Percentage</button></a></li>
+    </ul>
+  </nav>
+  <section>
+    <h1>🎓 CGPA Calculator</h1>
+    <div class="container1">
+      <p class="description">
+        This is a simple CGPA calculator that calculates your CGPA based on your grades and credits.
+      </p>
+      <div class="formula">
+        <strong>CGPA =</strong>
+        <span class="formula-math">Σ(Grade × Credit) / Σ(Credit)</span>
+      </div>
+
+      <div class="row">
+        <label>Previous CGPA:
+          <input type="number" id="prevCgpa" step="0.01" value="0" />
+        </label>
+      </div>
+
+      <div class="row">
+        <label>Previous Credits:
+          <input type="number" id="prevCredits" step="0.1" value="0" />
+        </label>
+      </div>
+
+      <div class="row">
+        <label for="subjectCount">Number of Subjects:
+          <input type="number" id="subjectCount" min="1" max="10" value="5" />
+          <button type="button" onclick="generateSubjects()">Generate</button>
+        </label>
+      </div>
+
+      <div id="subjectFields"></div>
+
+      <form id="cgpaForm">
+        <button type="submit">🎓 Calculate CGPA</button>
+      </form>
+
+      <div id="errorMessage" class="error"></div>
+      <div id="cgpaResult" class="result"></div>
+    </div>
+  </section>
+
+  <script src="cgpa.js"></script>
+</body>
+</html>
+
+
