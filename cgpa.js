@@ -84,7 +84,7 @@ document.getElementById("cgpaForm").addEventListener("submit", function (e) {
   const totalOverallCredits = totalCredits + prevCredits;
   const totalOverallPoints = totalPoints + (prevCgpa * prevCredits);
 
-  const newCgpa = totalOverallCredits === 0 ? 0 : (totalOverallPoints / totalOverallCredits).toFixed(2);
+  const newCgpa = totalOverallCredits === 0 ? 0 : (totalOverallPoints / totalOverallCredits).toFixed(3);
 
   resultBox.innerText = `🎉 Your CGPA is: ${newCgpa}`;
 });
